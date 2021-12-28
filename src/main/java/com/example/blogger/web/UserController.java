@@ -6,8 +6,12 @@ import com.example.blogger.domain.user.dto.AddRoleDto;
 import com.example.blogger.domain.user.dto.UpdateUserDto;
 import com.example.blogger.services.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,6 +27,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
+//@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;
@@ -31,6 +36,17 @@ public class UserController {
     @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
+    }
+
+    @GetMapping("/user")
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CUSTOMER_REP')")
+    public ResponseEntity<User> findUser() {
+        String currentUserName = "";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            currentUserName = authentication.getName();
+        }
+        return ResponseEntity.ok().body(userService.getUser(currentUserName));
     }
 
     @PostMapping("/user/save")
@@ -65,7 +81,7 @@ public class UserController {
         return ResponseEntity.ok().body(userService.updateUser(userDto));
     }
 
-    @DeleteMapping(path = "{customerId}")
+    @DeleteMapping(path = "/users/{customerId}")
     @PreAuthorize("hasAnyAuthority('ROLE_MANAGER', 'ROLE_CUSTOMER_REP')")
     public ResponseEntity<Void> deleteCustomer(@PathVariable("customerId") Long id) {
         return ResponseEntity.ok().build();

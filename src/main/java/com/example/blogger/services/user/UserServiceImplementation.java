@@ -28,9 +28,9 @@ import java.util.Objects;
 @Slf4j
 public class UserServiceImplementation implements UserService, UserDetailsService {
 
-   private final UserRepository userRepository;
-   private final RoleRepository roleRepository;
-   private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -54,7 +54,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     public User saveUser(User user) {
         // check if user exists
         User possibleUser = userRepository.findByUsername(user.getUsername());
-        if(possibleUser != null) {
+        if (possibleUser != null) {
             return null;
         }
         log.info("Saving new user: {} to the database", user.getName());
@@ -98,7 +98,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         User user = userRepository.findById(userDto.getId())
                 .orElseThrow(() -> new UsernameNotFoundException("User by provided id doesn't exist"));
 
-        if(userDto.getName() != null && userDto.getName().length() > 0 && !Objects.equals(user.getName(), userDto.getName())) {
+        if (userDto.getName() != null && userDto.getName().length() > 0 && !Objects.equals(user.getName(), userDto.getName())) {
             user.setName(userDto.getName());
         }
         if (userDto.getUsername() != null && userDto.getUsername().length() > 0 && !Objects.equals(user.getUsername(), userDto.getUsername())) {
@@ -127,8 +127,6 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 
         Role role = Role.builder().name("ROLE_MANAGER").build();
 
-        roleRepository.save(role);
-
         User newUser = User.builder()
                 .username("admin")
                 .password("admin")
@@ -141,10 +139,11 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 
         User existingUser = userRepository.findByUsername(newUser.getUsername());
 
-        if(existingUser != null)
+        if (existingUser != null)
             return;
 
         userRepository.save(newUser);
+        roleRepository.save(role);
     }
 
 }

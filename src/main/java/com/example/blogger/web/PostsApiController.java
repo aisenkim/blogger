@@ -6,18 +6,20 @@ import com.example.blogger.web.dto.PostsResponseDto;
 import com.example.blogger.web.dto.PostsSaveRequestDto;
 import com.example.blogger.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class PostsApiController {
 
     private final PostsService postsService;
 
     @PostMapping("/api/v1/posts")
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CUSTOMER_REP', 'ROLE_CUSTOMER')")
     public Long save(@RequestBody PostsSaveRequestDto requestDto) {
         return postsService.save(requestDto);
     }
