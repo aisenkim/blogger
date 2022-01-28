@@ -2,8 +2,8 @@ package com.example.blogger.web;
 
 import com.example.blogger.domain.posts.Posts;
 import com.example.blogger.domain.posts.PostsRepository;
-import com.example.blogger.web.dto.PostsSaveRequestDto;
-import com.example.blogger.web.dto.PostsUpdateRequestDto;
+import com.example.blogger.domain.posts.dto.PostsSaveRequestDto;
+import com.example.blogger.domain.posts.dto.PostsUpdateRequestDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

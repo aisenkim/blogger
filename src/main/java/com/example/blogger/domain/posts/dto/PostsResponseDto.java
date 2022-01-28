@@ -1,4 +1,4 @@
-package com.example.blogger.web.dto;
+package com.example.blogger.domain.posts.dto;
 
 import com.example.blogger.domain.posts.Posts;
 import lombok.Getter;

@@ -1,10 +1,10 @@
 package com.example.blogger.web;
 
 import com.example.blogger.services.posts.PostsService;
-import com.example.blogger.web.dto.PostsListResponseDto;
-import com.example.blogger.web.dto.PostsResponseDto;
-import com.example.blogger.web.dto.PostsSaveRequestDto;
-import com.example.blogger.web.dto.PostsUpdateRequestDto;
+import com.example.blogger.domain.posts.dto.PostsListResponseDto;
+import com.example.blogger.domain.posts.dto.PostsResponseDto;
+import com.example.blogger.domain.posts.dto.PostsSaveRequestDto;
+import com.example.blogger.domain.posts.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

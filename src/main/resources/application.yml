@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    username: ''
+    url: jdbc:postgresql://localhost:5432/blogger
+    password: ''
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+  session:
+    store-type: jdbc
+application:
+  jwt:
+    tokenPrefix: 'Bearer '
+    tokenExpirationAfterDays: '10'
+    secretKey: generateSecureKeyForProductiongenerateSecureKeyForProduction
