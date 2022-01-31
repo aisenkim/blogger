@@ -5,10 +5,12 @@ import com.example.blogger.domain.problems.enums.ProblemSource;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class Problems extends BaseTimeEntity {

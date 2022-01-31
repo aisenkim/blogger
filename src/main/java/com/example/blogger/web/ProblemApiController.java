@@ -1,6 +1,7 @@
 package com.example.blogger.web;
 
 import com.example.blogger.domain.problems.Problems;
+import com.example.blogger.domain.problems.dto.UpdateProblemDto;
 import com.example.blogger.services.problems.ProblemService;
 import com.example.blogger.domain.problems.dto.ProblemsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +17,21 @@ public class ProblemApiController {
 
     private final ProblemService problemService;
 
+    /**
+     * Save problem
+     * @param requestDto - dto for saving problem
+     * @return saved id
+     */
     @PostMapping
     public ResponseEntity<Long> save(@RequestBody ProblemsSaveRequestDto requestDto) {
         return ResponseEntity.ok().body(problemService.save(requestDto));
     }
 
+    /**
+     * Get problems by category
+     * @param category - 1) review 2) solved
+     * @return List of problems in provided category
+     */
     @GetMapping("/category")
     public ResponseEntity<List<Problems>> getProblemsByCategory(@RequestParam String category) {
         return ResponseEntity.ok().body(problemService.getProblemsByCategory(category));
@@ -34,6 +45,11 @@ public class ProblemApiController {
     @GetMapping
     public ResponseEntity<List<Problems>> getProblems(@RequestParam String sort) {
         return ResponseEntity.ok().body(problemService.getProblems(sort));
+    }
+
+    @PutMapping
+    public ResponseEntity<Problems> updateProblem(@RequestBody UpdateProblemDto updateDto) {
+        return ResponseEntity.ok().body(problemService.updateProblem(updateDto));
     }
 
 }

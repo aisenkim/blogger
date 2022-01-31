@@ -14,9 +14,7 @@ public interface ProblemService {
     // GET LEETCODE PROBLEM
     List<Problems> getProblems(String sort);
 
-    List<Problems> getReviewProblems();
-
-    List<Problems> getSolvedProblems();
+    List<Problems> getProblemsByCategory(String category);
 
     // UPDATE A PROBLEM
     Problems updateProblem(UpdateProblemDto problemDto);

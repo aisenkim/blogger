@@ -11,6 +11,10 @@ import lombok.Setter;
 public class UpdateProblemDto {
 
     @NotNull
+    @JsonProperty("id")
+    private Long id;
+
+    @NotNull
     @JsonProperty("title")
     private String title;
 
@@ -26,12 +30,25 @@ public class UpdateProblemDto {
     @JsonProperty("difficulty")
     private String difficulty;
 
+    @JsonProperty("source")
+    private String source;
+
+    @JsonProperty("solved")
+    private Integer solved;
+
+    @JsonProperty("review")
+    private Boolean review;
+
     @Builder
-    public UpdateProblemDto(String title, String url, String topic, String pattern, String difficulty) {
+    public UpdateProblemDto(Long id, String title, String url, String topic, String pattern, String difficulty, String source, Integer solved, Boolean review) {
+        this.id = id;
         this.title = title;
         this.url = url;
         this.topic = topic;
         this.pattern = pattern;
         this.difficulty = difficulty;
+        this.source = source;
+        this.solved = solved;
+        this.review = review;
     }
 }

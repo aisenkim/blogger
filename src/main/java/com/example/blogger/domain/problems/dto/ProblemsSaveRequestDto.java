@@ -13,14 +13,20 @@ public class ProblemsSaveRequestDto {
     private String topic;
     private String pattern;
     private String difficulty;
+    private Boolean review;
+    private Integer solved;
+    private String source;
 
     @Builder
-    public ProblemsSaveRequestDto(String title, String url, String topic, String pattern, String difficulty) {
+    public ProblemsSaveRequestDto(String title, String url, String topic, String pattern, String difficulty, Boolean review, Integer solved, String source) {
         this.title = title;
         this.url = url;
         this.topic = topic;
         this.pattern = pattern;
         this.difficulty = difficulty;
+        this.review = review;
+        this.solved = solved;
+        this.source = source;
     }
 
     public Problems toEntity() {
