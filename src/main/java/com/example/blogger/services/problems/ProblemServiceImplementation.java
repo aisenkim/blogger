@@ -7,9 +7,7 @@ import com.example.blogger.domain.problems.dto.UpdateProblemDto;
 import com.example.blogger.domain.problems.enums.ProblemSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -90,5 +88,16 @@ public class ProblemServiceImplementation implements ProblemService {
         }
 
         return problemToUpdate;
+    }
+
+    @Override
+    public Long deleteProblem(Long id) {
+        Problems problem = problemsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("The problem by the id: " + id + " doesn't exist"));
+        Long deleteProblemId = problem.getId();
+
+        problemsRepository.delete(problem);
+
+        return deleteProblemId;
     }
 }

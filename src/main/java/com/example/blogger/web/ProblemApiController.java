@@ -5,6 +5,7 @@ import com.example.blogger.domain.problems.dto.UpdateProblemDto;
 import com.example.blogger.services.problems.ProblemService;
 import com.example.blogger.domain.problems.dto.ProblemsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,9 +48,18 @@ public class ProblemApiController {
         return ResponseEntity.ok().body(problemService.getProblems(sort));
     }
 
+    /**
+     * Updates problem with whatever is provided by id
+     * @param updateDto - fields that don't need update are null
+     * @return - updated problem
+     */
     @PutMapping
     public ResponseEntity<Problems> updateProblem(@RequestBody UpdateProblemDto updateDto) {
         return ResponseEntity.ok().body(problemService.updateProblem(updateDto));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> deleteProblem(@PathVariable Long id) {
+        return ResponseEntity.ok().body(problemService.deleteProblem(id));
+    }
 }

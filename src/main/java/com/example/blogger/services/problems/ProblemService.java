@@ -19,4 +19,5 @@ public interface ProblemService {
     // UPDATE A PROBLEM
     Problems updateProblem(UpdateProblemDto problemDto);
 
+    Long deleteProblem(Long id);
 }
